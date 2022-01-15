@@ -1,0 +1,87 @@
+buildscript {
+    ext.kotlin_version = '1.4.32'
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url 'https://storage.googleapis.com/r8-releases/raw'
+        }
+        jcenter {
+            content {
+                includeVersion 'org.jetbrains.trove4j', 'trove4j', '20160824'
+                includeGroupByRegex "com\\.archinamon.*"
+            }
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+            content {
+                includeGroupByRegex "org\\.jlleitschuh\\.gradle.*"
+            }
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools:r8:3.0.73'
+        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5'
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.17'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jlleitschuh.gradle:ktlint-gradle:10.0.0"
+        classpath 'app.cash.exhaustive:exhaustive-gradle:0.1.1'
+    }
+}
+
+ext {
+    BUILD_TOOL_VERSION = '30.0.2'
+
+    COMPILE_SDK = 30
+    TARGET_SDK  = 30
+    MINIMUM_SDK = 19
+
+    JAVA_VERSION = JavaVersion.VERSION_1_8
+
+    LIBSIGNAL_CLIENT_VERSION = '0.9.4'
+}
+
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
+subprojects {
+    ext.lib_signal_service_version_number   = "2.15.3"
+    ext.lib_signal_service_group_info       = "org.whispersystems"
+    ext.lib_signal_client_version           = "0.1.0"
+
+    if (JavaVersion.current().isJava8Compatible()) {
+        allprojects {
+            tasks.withType(Javadoc) {
+                options.addStringOption('Xdoclint:none', '-quiet')
+            }
+        }
+    }
+
+    if (project.name != "Signal-Android" && project.name != "libsignal-service" && project.name != "lintchecks" && !project.name.endsWith("-app")) {
+        task qa {
+            group 'Verification'
+            description 'Quality Assurance. Run before pushing'
+            dependsOn 'testReleaseUnitTest', 'lintRelease'
+        }
+    }
+}
+
+task qa {
+    group 'Verification'
+    description 'Quality Assurance. Run before pushing.'
+    dependsOn ':Signal-Android:testPlayProdReleaseUnitTest',
+            ':Signal-Android:lintPlayProdRelease',
+            'Signal-Android:ktlintCheck',
+            ':libsignal-service:test',
+            ':Signal-Android:assemblePlayProdRelease'
+}

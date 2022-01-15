@@ -1,0 +1,28 @@
+# Can specify scenarios to use when none are specified on the command line
+default-scenarios = ["clean_build"]
+
+# Scenarios are run in alphabetical order
+clean_build {
+    title = "Clean Build"
+    versions = ["7.3.3"]
+    tasks = [":Signal-Android:assemblePlayStagingDebug"]
+    gradle-args = ["--parallel"]
+    system-properties {
+        // "key" = "value"
+    }
+    cleanup-tasks = ["clean"]
+    run-using = tooling-api // value can be "cli" or "tooling-api"
+    daemon = none // value can be "warm", "cold", or "none"
+    measured-build-ops = [] // see --measure-build-op
+
+    warm-ups = 2
+}
+androidStudioSync {
+    title = "Android Studio Sync"
+    # Measure an Android studio sync
+    # Note: Android Studio Bumblebee (2021.1.1) or newer is required
+    android-studio-sync {
+        # Override default Android Studio jvm args
+        # studio-jvm-args = ["-Xms256m", "-Xmx4096m"]
+    }
+}

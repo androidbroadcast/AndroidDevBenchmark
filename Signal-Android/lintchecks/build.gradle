@@ -1,0 +1,20 @@
+apply plugin: 'java-library'
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly lintLibs.lint.api
+    compileOnly lintLibs.lint.checks
+
+    testImplementation lintLibs.lint.tests
+    testImplementation testLibs.junit.junit
+}
+
+jar {
+    manifest {
+        attributes('Lint-Registry-v2': 'org.signal.lint.Registry')
+    }
+}
