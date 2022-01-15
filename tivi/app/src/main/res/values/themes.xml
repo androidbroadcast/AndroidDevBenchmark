@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2017 Google, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.navig
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Platform.Theme.Tivi" parent="android:Theme.Material.Light" />
+
+    <style name="Base.Theme.Tivi" parent="Platform.Theme.Tivi">
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="Theme.Tivi" parent="Base.Theme.Tivi">
+    </style>
+
+    <style name="Theme.Tivi.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Tivi.Immerse" parent="Theme.Tivi.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
+        <item name="android:navigationBarColor">@color/nav_bar_scrim</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">@bool/use_light_nav_bar</item>
+    </style>
+
+    <style name="Theme.Tivi.Home" parent="Theme.Tivi.Immerse">
+        <item name="android:windowLightStatusBar">@bool/use_light_status_bar</item>
+    </style>
+
+</resources>
