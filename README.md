@@ -11,7 +11,7 @@
         1. Скачайте прикрепленный ниже Gradle Profiler
         2. Добавьте из скаченного архива папку `bin` в `$PATH`
         
-        [gradle-profiler.zip](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1cba50ca-b0f1-4ae2-86f2-31b7b7950dfc/gradle-profiler.zip)
+        Скачать Gradle Profiler можно [здесь](https://disk.yandex.ru/d/7li4YcBoU3i6CQ)
         
 2. Установить JDK 11 (или обновить до последней версии) и сделать ее по умолчанию (прописать в JAVA_HOME). Для X86-64 брать версию OpenJDK, а для Apple M1 - Zulu ARM. Также убедитесь что она обновлена у нас до последней ревизии
 
