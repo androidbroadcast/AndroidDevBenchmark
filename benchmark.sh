@@ -2,8 +2,12 @@
 DATE_WITH_TIME=`date "+%Y%m%d-%H%M%S"`
 OUTPUT_DIR="benchmark-results"
 
+export ANDROID_HOME="$(pwd)/android-sdk" 
+echo $ANDROID_HOME
+
+#  ExoPlayer firefox focus-android Signal-Android tivi Telegram
 for VARIABLE in ExoPlayer firefox focus-android Signal-Android tivi Telegram
 do
     echo "Inspecting $VARIABLE"
-    gradle-profiler --benchmark --project-dir $VARIABLE --output-dir "$OUTPUT_DIR/$VARIABLE/$USER--$DATE_WITH_TIME" --scenario-file $VARIABLE/performance.scenarios clean_build
+    gradle-profiler --benchmark --project-dir $VARIABLE --output-dir "$OUTPUT_DIR/$VARIABLE/$USER--$DATE_WITH_TIME" --scenario-file $VARIABLE/performance.scenarios clean_build --iterations 1 --warmup 1
 done

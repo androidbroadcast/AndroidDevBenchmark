@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<versionMapping>
+  <server version="1" skpStart="56" skpEnd="73"/>
+  <server version="2" skpStart="73" skpEnd="86"/>
+  <server version="3" skpStart="82" skpEnd="91"/>
+</versionMapping>
