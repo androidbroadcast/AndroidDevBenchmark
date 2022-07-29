@@ -8,5 +8,5 @@ export ANDROID_HOME="$(pwd)/android-sdk"
 for VARIABLE in ExoPlayer firefox focus-android Signal-Android tivi Telegram
 do
     echo "Inspecting $VARIABLE"
-    gradle-profiler --benchmark --project-dir $VARIABLE --output-dir "$OUTPUT_DIR/$VARIABLE/$USER--$DATE_WITH_TIME" --scenario-file $VARIABLE/performance.scenarios clean_build --iterations 10 --warmup 6
+    gradle-profiler --benchmark --project-dir $VARIABLE --output-dir "$OUTPUT_DIR/$VARIABLE/$USER--$DATE_WITH_TIME" --scenario-file $VARIABLE/performance.scenarios clean_build --iterations 5 --warmup 2
 done
